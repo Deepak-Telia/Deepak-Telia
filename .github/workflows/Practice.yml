@@ -15,16 +15,11 @@ jobs:
    
     steps:  
       - name: "Change Values Bases on Environment Variables Dev"
-        if: ${{ github.event.inputs.deployment == 'dev' }} 
-        run: echo "Deploying to  ${{github.event.inputs.deployment}}"
-        env:
-          NAMESPACE: tfl-dev
-          DEPLOYMENT: tfi-docker-dev-local
-          
-      - name: Set selected color
-        run: echo '::set-output name=SELECTED_COLOR::dev'
-        id: random-color-generator
-        
-      - name: Get color
-        run: echo "The selected color is ${{ steps.random-color-generator.outputs.SELECTED_COLOR }}"    
+        if: ${{ github.event.inputs.deployment == 'dev' }}        
+        run: |
+         echo "Deploying to  ${{github.event.inputs.deployment}}"
+         echo '::set-output name=NAMESPACE::tlf-dev'
+    
+      - name: Get Namespace
+        run: echo "The selected color is ${{ steps.outputs.NAMESPACE }}"    
     
