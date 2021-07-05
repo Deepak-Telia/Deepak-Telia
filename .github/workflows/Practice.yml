@@ -12,39 +12,19 @@ jobs:
   build:
     #Setup Environment
     runs-on: ubuntu-latest
-
+   
     steps:  
       - name: "Change Values Bases on Environment Variables Dev"
-        if: ${{ github.event.inputs.deployment == 'dev' }}  
-        id: environmentDev
+        if: ${{ github.event.inputs.deployment == 'dev' }} 
         run: echo "Deploying to  ${{github.event.inputs.deployment}}"
         env:
           NAMESPACE: tfl-dev
           DEPLOYMENT: tfi-docker-dev-local
           
-      - name: "Change Values Bases on Environment Variables Test"   
-        if: ${{ github.event.inputs.deployment == 'test' }}
-        run: echo "Deploying to  ${{github.event.inputs.deployment}}"
-        env:
-          namespace: tfl-test
-          deployment: tfi-docker-dev-local
-           
-      - name: "Change Values Bases on Environment Variables Uat"   
-        if: ${{ github.event.inputs.deployment == 'uat' }}
-        run: echo "Deploying to  ${{github.event.inputs.deployment}}"
-        env:
-          namespace: tfl-uat
-          deployment: tfi-docker-dev-local
-
-      - name: "Change Values Bases on Environment Variables Prod"   
-        if: ${{ github.event.inputs.deployment == 'prod' }}
-        run: echo "Deploying to  ${{github.event.inputs.deployment}}"
-        env:
-          namespace: tfl-prod
-          deployment: tfi-docker-prod-local
-          
-      - name: "Change Values Bases on Environment Variables Prod"   
-        run: |
-          echo ${{steps.environmentDev.env.NAMESPACE}}
+      - name: "Check 1"   
+        run: env.NAMESPACE
+                  
+      - name: "Check 2"   
+        run: echo ${{env.NAMESPACE}}
        
         
