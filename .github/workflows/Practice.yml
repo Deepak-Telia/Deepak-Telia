@@ -15,25 +15,29 @@ jobs:
 
     steps:  
       - name: "Change Values Bases on Environment Variables Dev"
-        if: ${{ github.event.inputs.deployment == 'dev' }}       
+        if: ${{ github.event.inputs.deployment == 'dev' }}  
+        run: echo "Deploying to  ${{github.event.inputs.deployment}}
         env:
           namespace: tfl-dev
           deployment: tfi-docker-dev-local
           
       - name: "Change Values Bases on Environment Variables Test"   
         if: ${{ github.event.inputs.deployment == 'test' }}
+        run: echo "Deploying to  ${{github.event.inputs.deployment}}
         env:
           namespace: tfl-test
           deployment: tfi-docker-dev-local
            
       - name: "Change Values Bases on Environment Variables Uat"   
         if: ${{ github.event.inputs.deployment == 'uat' }}
+        run: echo "Deploying to  ${{github.event.inputs.deployment}}
         env:
           namespace: tfl-uat
           deployment: tfi-docker-dev-local
 
       - name: "Change Values Bases on Environment Variables Prod"   
         if: ${{ github.event.inputs.deployment == 'prod' }}
+        run: echo "Deploying to  ${{github.event.inputs.deployment}}
         env:
           namespace: tfl-prod
           deployment: tfi-docker-prod-local
