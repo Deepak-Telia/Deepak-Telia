@@ -1,0 +1,45 @@
+name: Maven and Docker Build
+
+on:
+  workflow_dispatch:
+    inputs:      
+      deployment:
+        description: 'Deployment[dev,test,uat,prod]'
+        required: true
+        default: 'dev'
+
+jobs:
+  build:
+    #Setup Environment
+    runs-on: ubuntu-latest
+
+    steps:  
+      - name: "Change Values Bases on Environment Variables Dev"
+        if: ${{ github.event.inputs.deployment == 'dev' }}       
+        env:
+          namespace: tfl-dev
+          deployment: tfi-docker-dev-local
+          
+      - name: "Change Values Bases on Environment Variables Test"   
+        if: ${{ github.event.inputs.deployment == 'test' }}
+        env:
+          namespace: tfl-test
+          deployment: tfi-docker-dev-local
+           
+      - name: "Change Values Bases on Environment Variables Uat"   
+        if: ${{ github.event.inputs.deployment == 'uat' }}
+        env:
+          namespace: tfl-uat
+          deployment: tfi-docker-dev-local
+
+      - name: "Change Values Bases on Environment Variables Prod"   
+        if: ${{ github.event.inputs.deployment == 'prod' }}
+        env:
+          namespace: tfl-prod
+          deployment: tfi-docker-prod-local
+          
+      - name: "Change Values Bases on Environment Variables Prod"   
+        run: |
+          echo ${{env.namespace}}
+          echo ${{env.deployment}}
+        
