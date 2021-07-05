@@ -44,6 +44,6 @@ jobs:
           
       - name: "Change Values Bases on Environment Variables Prod"   
         run: |
-          echo ${{NAMESPACE}}
-          echo ${{DEPLOYMENT}}
+          echo ${{env.NAMESPACE}}
+          echo ${{env.DEPLOYMENT}}
         
