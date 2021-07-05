@@ -22,9 +22,7 @@ jobs:
           DEPLOYMENT: tfi-docker-dev-local
           
       - name: "Check 1"   
-        run: env.NAMESPACE
+        run: env
                   
       - name: "Check 2"   
         run: echo ${{env.NAMESPACE}}
-       
-        
