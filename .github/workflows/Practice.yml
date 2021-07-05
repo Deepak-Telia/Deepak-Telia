@@ -18,8 +18,8 @@ jobs:
         if: ${{ github.event.inputs.deployment == 'dev' }}  
         run: echo "Deploying to  ${{github.event.inputs.deployment}}"
         env:
-          namespace: tfl-dev
-          deployment: tfi-docker-dev-local
+          NAMESPACE: tfl-dev
+          DEPLOYMENT: tfi-docker-dev-local
           
       - name: "Change Values Bases on Environment Variables Test"   
         if: ${{ github.event.inputs.deployment == 'test' }}
@@ -44,6 +44,6 @@ jobs:
           
       - name: "Change Values Bases on Environment Variables Prod"   
         run: |
-          echo ${{env.namespace}}
-          echo ${{env.deployment}}
+          echo ${{NAMESPACE}}
+          echo ${{DEPLOYMENT}}
         
