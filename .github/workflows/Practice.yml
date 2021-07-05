@@ -16,6 +16,7 @@ jobs:
     steps:  
       - name: "Change Values Bases on Environment Variables Dev"
         if: ${{ github.event.inputs.deployment == 'dev' }}  
+        id: environmentDev
         run: echo "Deploying to  ${{github.event.inputs.deployment}}"
         env:
           NAMESPACE: tfl-dev
@@ -44,6 +45,6 @@ jobs:
           
       - name: "Change Values Bases on Environment Variables Prod"   
         run: |
-          echo ${{env.NAMESPACE}}
-          echo ${{env.DEPLOYMENT}}
+          echo ${{steps.environmentDev.env.NAMESPACE}}
+       
         
