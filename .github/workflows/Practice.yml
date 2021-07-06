@@ -27,7 +27,5 @@ jobs:
         run: echo "::set-env name=MY_ENV::test"
          
       - name: Check Value
-        uses: actionOrg/actionRepo@master
-        with:
-          input: ${{ env.MY_ENV }}  # the input value is "env value 02"                
+        run: echo  ${{ env.MY_ENV }} 
  
