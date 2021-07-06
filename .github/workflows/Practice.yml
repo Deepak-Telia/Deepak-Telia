@@ -12,7 +12,9 @@ jobs:
   build:
     #Setup Environment
     runs-on: ubuntu-latest
-   
+    env:
+      MY_ENV: "dev"
+      
     steps:  
       - name: "Change Values Bases on Environment Variables Dev"
         if: ${{ github.event.inputs.deployment == 'dev' }}        
@@ -20,6 +22,12 @@ jobs:
          echo "Deploying to  ${{github.event.inputs.deployment}}"
          echo '::set-output name=NAMESPACE::tlf-dev'
     
-      - name: Get Namespace
-        run: echo "The selected color is ${{ steps.outputs.NAMESPACE }}"    
-    
+      - name: "Change Values Bases on Environment Variables Test"
+        if: ${{ github.event.inputs.deployment == 'test' }}        
+        run: echo "::set-env name=MY_ENV::test"
+         
+      - name: Check Value
+        uses: actionOrg/actionRepo@master
+        with:
+          input: ${{ env.MY_ENV }}  # the input value is "env value 02"                
+ 
