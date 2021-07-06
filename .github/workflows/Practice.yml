@@ -14,6 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       MY_ENV: "dev"
+      ACTIONS_ALLOW_UNSECURE_COMMANDS: true
       
     steps:  
       - name: "Change Values Bases on Environment Variables Dev"
@@ -23,7 +24,7 @@ jobs:
          echo '::set-output name=NAMESPACE::tlf-dev'
     
       - name: "Change Values Bases on Environment Variables Test"
-        if: ${{ github.event.inputs.deployment == 'test' }}        
+        if: ${{ github.event.inputs.deployment == 'test' }}          
         run: echo "::set-env name=MY_ENV::test"
          
       - name: Check Value
